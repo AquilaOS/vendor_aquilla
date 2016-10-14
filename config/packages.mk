@@ -86,5 +86,5 @@ PRODUCT_PACKAGES += \
 	libswscale \
 	libswresample
 
-include vendor/xos/config/essentials.mk
+include vendor/ao/config/essentials.mk
 	

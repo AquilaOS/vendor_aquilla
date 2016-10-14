@@ -28,39 +28,39 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/xos/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/xos/prebuilt/common/addon.d/50-backuptool.sh:system/addon.d/50-backuptool.sh \
-    vendor/xos/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
-    vendor/xos/prebuilt/common/bin/whitelist:system/addon.d/whitelist \
+    vendor/ao/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/ao/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/ao/prebuilt/common/addon.d/50-backuptool.sh:system/addon.d/50-backuptool.sh \
+    vendor/ao/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
+    vendor/ao/prebuilt/common/bin/whitelist:system/addon.d/whitelist \
 
 # Safemode script
 PRODUCT_COPY_FILES += \
-	vendor/xos/prebuilt/common/bin/safemode:system/bin/safemode
+	vendor/ao/prebuilt/common/bin/safemode:system/bin/safemode
 
 # Bootanimation
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip
+    vendor/ao/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip
 
 # init.d support
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/bin/sysinit:system/bin/sysinit \
-    vendor/xos/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/xos/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
-    vendor/xos/prebuilt/common/etc/init.d/01safemode:system/etc/init.d/01safemode
+    vendor/ao/prebuilt/common/bin/sysinit:system/bin/sysinit \
+    vendor/ao/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/ao/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/ao/prebuilt/common/etc/init.d/01safemode:system/etc/init.d/01safemode
 
 # Specific settings at boot
 PRODUCT_COPY_FILES += \
-	vendor/xos/prebuilt/common/etc/init.d/92xossettings:system/etc/init.d/92xossettings
+	vendor/ao/prebuilt/common/etc/init.d/92aosettings:system/etc/init.d/92aosettings
 
 # Init file
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/etc/init.local.rc:root/init.local.rc
+    vendor/ao/prebuilt/common/etc/init.local.rc:root/init.local.rc
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
-    vendor/xos/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/xos/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+    vendor/ao/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
+    vendor/ao/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -72,24 +72,24 @@ PRODUCT_COPY_FILES += \
 
 # World APN list
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+    vendor/ao/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Selective SPN list for operator number who has the problem.
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/etc/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
+    vendor/ao/prebuilt/common/etc/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
 
 # Overlays & Include LatinIME dictionaries
 PRODUCT_PACKAGE_OVERLAYS += \
-	vendor/xos/overlay/common \
-	vendor/xos/overlay/dictionaries
+	vendor/ao/overlay/common \
+	vendor/ao/overlay/dictionaries
 
 # Proprietary latinime libs needed for Keyboard swyping
 ifneq ($(filter arm64,$(TARGET_ARCH)),)
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+    vendor/ao/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 else
 PRODUCT_COPY_FILES += \
-    vendor/xos/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so
+    vendor/ao/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so
 endif
 
 # by default, do not update the recovery with system updates
@@ -102,32 +102,32 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
 # Additional packages
--include vendor/xos/config/packages.mk
+-include vendor/ao/config/packages.mk
 
 # Versioning
 ANDROID_VERSION = 7.0
 PLATFORM_VERSION_CODENAME = REL
-ifndef XOS_BUILD_TYPE
-    XOS_BUILD_TYPE := beta
+ifndef AO_BUILD_TYPE
+    AO_BUILD_TYPE := alpha
 endif
-XOS_VER := 0.5
-ifdef XOS_BUILD_TYPE
-    XOS_VERSION_NUMBER = $(XOS_VER)-$(XOS_BUILD_TYPE)
+AO_VER := 0.1
+ifdef AO_BUILD_TYPE
+    AO_VERSION_NUMBER = $(AO_VER)-$(AO_BUILD_TYPE)
 else
-    XOS_VERSION_NUMBER = $(XOS_VER)
+    AO_VERSION_NUMBER = $(AO_VER)
 endif
 
 ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-    XOS_BUILD_TYPE :=$(TARGET_UNOFFICIAL_BUILD_ID)
+    AO_BUILD_TYPE :=$(TARGET_UNOFFICIAL_BUILD_ID)
 endif
 
 # Set all versions
-XOS_VERSION := XOS_$(XOS_BUILD)_$(ANDROID_VERSION)_$(shell date +%Y%m%d)_$(XOS_VERSION_NUMBER)
-XOS_MOD_VERSION := XOS_$(XOS_BUILD)_$(ANDROID_VERSION)_$(shell date +%Y%m%d)_$(XOS_VERSION_NUMBER)
+AO_VERSION := AO_$(AO_BUILD)_$(ANDROID_VERSION)_$(shell date +%Y%m%d)_$(AO_VERSION_NUMBER)
+AO_MOD_VERSION := AO_$(AO_BUILD)_$(ANDROID_VERSION)_$(shell date +%Y%m%d)_$(AO_VERSION_NUMBER)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    ro.xos.version=$(XOS_VERSION_NUMBER) \
-    ro.mod.version=$(XOS_BUILD_TYPE)-v$(XOS_VERSION_NUMBER) \
+    ro.ao.version=$(AO_VERSION_NUMBER) \
+    ro.mod.version=$(AO_BUILD_TYPE)-v$(AO_VERSION_NUMBER) \
 
 $(call inherit-product-if-exists, vendor/extra/product.mk)
