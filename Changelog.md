@@ -1,4 +1,4 @@
 ---------------
-apolloOS vendor
+AquilaOS vendor
 ---------------
 
